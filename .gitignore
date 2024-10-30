@@ -1,0 +1,27 @@
+# Ignorar archivos de Docker
+*.log
+*.tmp
+*.pid
+
+# Archivos de compilación de Docker
+docker-compose.override.yml
+docker-compose.debug.yml
+
+# Contenedores y volúmenes
+*/containers/*
+*/volumes/*
+*/overlay/*
+*/overlay2/*
+*/aufs/*
+*/mnt/*
+
+# Ignorar imágenes temporales de Docker y archivos de configuración
+docker-compose.yml
+docker-compose.*
+Dockerfile.*
+.dockerignore
+.env
+
+# Archivos generados por Docker
+**/docker-data/
+**/docker-images/
