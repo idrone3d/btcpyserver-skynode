@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     gnupg \
     apt-transport-https \
     git \
+    ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
 # Instala Docker dentro del contenedor para gestionar BTCPay Server
@@ -43,15 +44,9 @@ ENV BTCPAYGEN_ADDITIONAL_FRAGMENTS=${BTCPAYGEN_ADDITIONAL_FRAGMENTS}
 ENV REVERSEPROXY_HTTP_PORT=${REVERSEPROXY_HTTP_PORT}
 ENV REVERSEPROXY_HTTPS_PORT=${REVERSEPROXY_HTTPS_PORT}
 
-# Ejecuta el setup de BTCPay Server durante la construcción
-RUN /btcpayserver/btcpay-setup.sh
-
 # Define el directorio de trabajo y permisos de ejecución
 WORKDIR /btcpayserver
 RUN chmod +x ./btcpay-setup.sh
 
 # Comando de inicio
 ENTRYPOINT ["./btcpay-setup.sh"]
-
-
-
