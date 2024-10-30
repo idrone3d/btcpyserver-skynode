@@ -19,7 +19,7 @@ RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /
 # Clona el repositorio de BTCPay Server
 RUN git clone https://github.com/btcpayserver/btcpayserver-docker.git /btcpayserver
 
-# Define las variables de entorno
+# Define las variables de entorno requeridas
 ARG BTCPAY_HOST
 ARG NBITCOIN_NETWORK
 ARG BTCPAYGEN_CRYPTO1
@@ -32,6 +32,7 @@ ARG BTCPAYGEN_ADDITIONAL_FRAGMENTS
 ARG REVERSEPROXY_HTTP_PORT
 ARG REVERSEPROXY_HTTPS_PORT
 
+# Asigna valores a las variables de entorno
 ENV BTCPAY_HOST=${BTCPAY_HOST}
 ENV NBITCOIN_NETWORK=${NBITCOIN_NETWORK}
 ENV BTCPAYGEN_CRYPTO1=${BTCPAYGEN_CRYPTO1}
@@ -50,3 +51,4 @@ RUN chmod +x ./btcpay-setup.sh
 
 # Comando de inicio
 ENTRYPOINT ["./btcpay-setup.sh"]
+
