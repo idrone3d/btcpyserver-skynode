@@ -49,6 +49,5 @@ ENV REVERSEPROXY_HTTPS_PORT=${REVERSEPROXY_HTTPS_PORT}
 WORKDIR /btcpayserver
 RUN chmod +x ./btcpay-setup.sh
 
-# Comando de inicio
-ENTRYPOINT ["./btcpay-setup.sh"]
-
+# Ejecuta el script usando `bash -c "source ..."`
+CMD ["/bin/bash", "-c", "source ./btcpay-setup.sh"]
