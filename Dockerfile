@@ -9,8 +9,8 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Instala Docker dentro del contenedor para gestionar BTCPay Server
-RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
-    && echo "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list \
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
+    && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian bookworm stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null \
     && apt-get update \
     && apt-get install -y docker-ce docker-ce-cli containerd.io
 
@@ -33,5 +33,6 @@ ENV REVERSEPROXY_HTTPS_PORT=${REVERSEPROXY_HTTPS_PORT}
 # Ejecuta el setup de BTCPay Server
 WORKDIR /btcpayserver
 RUN chmod +x btcpay-setup.sh
-ENTRYPOINT [ "./btcpay-setup.sh" ]
+ENTRYPOINT ["./btcpay-setup.sh"]
+
 
